@@ -11,6 +11,7 @@ import { SignUp } from "../pages/SignUp";
 // ADMIN PAGES
 import { Called } from "../pages/adminPages/Called";
 import { Technical } from "../pages/adminPages/AllTechnical";
+import { AllServices } from "../pages/adminPages/AllServices";
 import { CalledDetails } from "../pages/adminPages/CalledDetails";
 // ADMIN PAGES SETTINGS
 import { NewTechnical } from "../pages/adminPages/tecnhicalSettings/NewTechnical";
@@ -37,7 +38,7 @@ function Router() {
 						<Route path="tecnicos/novo" element={<NewTechnical />} />
 						<Route path="tecnicos/:id/edit" element={<EditTechnical />} />
 						<Route path="clientes" element={<AllCustomers />} />
-						<Route path="servicos" element />
+						<Route path="servicos" element={<AllServices />} />
 					</Route>
 
 					<Route path="/" element={<AuthenticatedLayout />}>
