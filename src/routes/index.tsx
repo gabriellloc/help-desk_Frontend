@@ -1,3 +1,4 @@
+import { useAuth } from "../hooks/useAuth";
 import { Routes, Route } from "react-router";
 
 // Layout
@@ -16,42 +17,41 @@ import { NewTechnical } from "../pages/adminPages/tecnhicalSettings/NewTechnical
 import { EditTechnical } from "../pages/adminPages/tecnhicalSettings/EditTechnical";
 import { AllCustomers } from "../pages/adminPages/AllCustomers";
 
-const user: { id: number; role: "admin" | "customer" | "technical" | "" } = {
-  id: 1,
-  role: "admin",
+
+const user: { id: number; role: "admin" | "customer" | "technical" } = {
+	id: 1,
+	role: "admin",
 };
 
 function Router() {
-  switch (user.role) {
-    case "admin":
-      return (
-        <Routes>
-          <Route path="admin" element={<MainLayout />}>
-            <Route index element={<Called />} />
-            <Route path=":id/detalhes" element={<CalledDetails />} />
-            <Route path="tecnicos" element={<Technical />} />
-            <Route path="tecnicos/novo" element={<NewTechnical />} />
-            <Route path="tecnicos/:id/edit" element={<EditTechnical />} />
-            <Route path="clientes" element={<AllCustomers />} />
-            <Route path="servicos" element />
-          </Route>
-        </Routes>
-      );
+	const context = useAuth();
+	console.log(context);
+	switch (user.role) {
+		case "admin":
+			return (
+				<Routes>
+					<Route path="admin" element={<MainLayout />}>
+						<Route index element={<Called />} />
+						<Route path=":id/detalhes" element={<CalledDetails />} />
+						<Route path="tecnicos" element={<Technical />} />
+						<Route path="tecnicos/novo" element={<NewTechnical />} />
+						<Route path="tecnicos/:id/edit" element={<EditTechnical />} />
+						<Route path="clientes" element={<AllCustomers />} />
+						<Route path="servicos" element />
+					</Route>
 
-    case "technical":
-      return;
-    case "customer":
-      return;
-    default:
-      return (
-        <Routes>
-          <Route path="/" element={<AuthenticatedLayout />}>
-            <Route index element={<Login />} />
-            <Route path="signUp" element={<SignUp />} />
-          </Route>
-        </Routes>
-      );
-  }
+					<Route path="/" element={<AuthenticatedLayout />}>
+						<Route index element={<Login />} />
+						<Route path="signUp" element={<SignUp />} />
+					</Route>
+				</Routes>
+			);
+
+		case "technical":
+			return;
+		case "customer":
+			return;
+	}
 }
 
 export { Router };
