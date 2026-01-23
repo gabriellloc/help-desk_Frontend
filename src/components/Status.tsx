@@ -17,7 +17,7 @@ const Icons = {
 	BanSvg
 };
 
-export const StatusVariants = cva("flex gap-2 p-1.5 px-2 rounded-[999px]", {
+export const StatusVariants = cva("flex gap-2 p-1.5 rounded-[999px]", {
 	variants: {
 		variant: {
 			open: "bg-[rgba(204,61,106,0.2)] w-fit text-feedback-open text-[12px] font-bold",
@@ -31,16 +31,17 @@ export const StatusVariants = cva("flex gap-2 p-1.5 px-2 rounded-[999px]", {
 });
 
 interface StatusProps extends VariantProps<typeof StatusVariants> {
-	children: "Aberto" | "Em atendimento" | "Encerrado" | React.ReactNode;
+	children?: "Aberto" | "Em atendimento" | "Encerrado" | React.ReactNode;
 	icon: "openSvg" | "pendingSvg" | "closedSvg" | "DoneSvg" | "BanSvg";
 	hiddenIcon?: boolean;
+	hiddenText?: boolean;
 }
 
-function Status({ children, variant, icon = "openSvg", hiddenIcon = false }: StatusProps) {
+function Status({ children, variant, icon = "openSvg", hiddenIcon = false, hiddenText = false }: StatusProps) {
 	return (
 		<div className={`${StatusVariants({ variant })}`}>
 			<img src={Icons[icon]} className="w-4 min-w-2" hidden={hiddenIcon} />
-			<p className="max-lg:hidden">{children}</p>
+			<p className="max-lg:hidden" hidden={hiddenText}>{children}</p>
 		</div>
 	);
 }

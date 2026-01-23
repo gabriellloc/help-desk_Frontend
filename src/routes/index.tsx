@@ -17,11 +17,12 @@ import { CalledDetails } from "../pages/adminPages/CalledDetails";
 import { NewTechnical } from "../pages/adminPages/tecnhicalSettings/NewTechnical";
 import { EditTechnical } from "../pages/adminPages/tecnhicalSettings/EditTechnical";
 import { AllCustomers } from "../pages/adminPages/AllCustomers";
+import { MyTechnicalCalled } from "../pages/technicalPages/MyCalled";
 
 
-const user: { id: number; role: "admin" | "customer" | "technical" } = {
+export const user: { id: number; role: "admin" | "customer" | "technical" | "" } = {
 	id: 1,
-	role: "admin",
+	role: "technical",
 };
 
 function Router() {
@@ -31,7 +32,7 @@ function Router() {
 		case "admin":
 			return (
 				<Routes>
-					<Route path="admin" element={<MainLayout />}>
+					<Route path="admin" element={<MainLayout type="admin" />}>
 						<Route index element={<Called />} />
 						<Route path=":id/detalhes" element={<CalledDetails />} />
 						<Route path="tecnicos" element={<Technical />} />
@@ -40,18 +41,28 @@ function Router() {
 						<Route path="clientes" element={<AllCustomers />} />
 						<Route path="servicos" element={<AllServices />} />
 					</Route>
+				</Routes>
+			);
 
+		case "technical":
+			return (
+				<Routes>
+					<Route path="/technical" element={<MainLayout type="technical" />}>
+						<Route index element={<MyTechnicalCalled />} />
+					</Route>
+				</Routes>
+			)
+		case "customer":
+			return;
+		default:
+			return (
+				<Routes>
 					<Route path="/" element={<AuthenticatedLayout />}>
 						<Route index element={<Login />} />
 						<Route path="signUp" element={<SignUp />} />
 					</Route>
 				</Routes>
-			);
-
-		case "technical":
-			return;
-		case "customer":
-			return;
+			)
 	}
 }
 
