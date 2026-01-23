@@ -8,18 +8,29 @@ import { Button } from "./Button";
 type User = {
 	id: number;
 	name: string;
-	email: string;
+	email?: string;
 };
+
+type ServicesProps = {
+	id: string
+	title: string
+	amount: number
+	status: boolean
+}
 
 interface ModalRegister {
 	user?: User;
+	services?: ServicesProps
 	type: "Cliente" | "Cadastro de serviço" | "Excluir Cliente";
 	onClose: () => void;
 }
 
-function ModalRegister({ user, type, onClose }: ModalRegister) {
+function ModalRegister({ user, type, services, onClose }: ModalRegister) {
 	const [name, setName] = useState(user?.name || "");
 	const [email, setEmail] = useState(user?.email || "");
+
+	const [title, setTitle] = useState(services?.title)
+	const [amount, setAmount] = useState(services?.amount)
 
 	if (type === "Excluir Cliente") {
 		return (
@@ -79,21 +90,25 @@ function ModalRegister({ user, type, onClose }: ModalRegister) {
 						placeholder={
 							type == "Cliente" ? "Nome completo" : "Nome do serviço"
 						}
-						value={type == "Cliente" ? name : ""}
+						value={type == "Cliente" ? name : services != undefined ? title : title}
 						onChange={(e) => setName(e.target.value)}
 						error={``}
 					/>
 					<Input
 						htmlFor="email"
 						name="email"
-						children={"Email"}
-						type={type == "Cliente" ? "email" : "text"}
+						children={type == "Cliente" ? "email" : "Valor"}
+						type={type == "Cliente" ? "email" : "number"}
+						min={0}
 						label={"labelDefault"}
 						input={"inputDefault"}
 						SError={"errorDefault"}
-						placeholder={type == "Cliente" ? "Email" : "0,00"}
-						value={type == "Cliente" ? email : "R$ "}
-						onChange={(e) => setEmail(e.target.value)}
+						placeholder={type == "Cliente" ? "Email" : "R$ 0,00"}
+						value={type == "Cliente" ? email : services != undefined ? amount : amount}
+						onChange={(e) => {
+							setEmail(e.target.value)
+							setAmount(Number(e.target.value))
+						}}
 						error={``}
 					/>
 				</form>

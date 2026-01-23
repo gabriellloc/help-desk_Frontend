@@ -1,14 +1,20 @@
+import React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 
+// Icons para Status do usuário
 import openSvg from "../assets/icons/icon/circle-help.svg";
 import closedSvg from "../assets/icons/icon/circle-check-big.svg";
 import pendingSvg from "../assets/icons/icon/clock-2.svg";
-import type React from "react";
+// Icons para Status de serviço
+import DoneSvg from "../assets/icons/icon/check.min.svg";
+import BanSvg from "../assets/icons/icon/ban.min.svg";
 
 const Icons = {
 	openSvg,
 	pendingSvg,
 	closedSvg,
+	DoneSvg,
+	BanSvg
 };
 
 export const StatusVariants = cva("flex gap-2 p-1.5 px-2 rounded-[999px]", {
@@ -26,14 +32,14 @@ export const StatusVariants = cva("flex gap-2 p-1.5 px-2 rounded-[999px]", {
 
 interface StatusProps extends VariantProps<typeof StatusVariants> {
 	children: "Aberto" | "Em atendimento" | "Encerrado" | React.ReactNode;
-	icon: "openSvg" | "pendingSvg" | "closedSvg";
+	icon: "openSvg" | "pendingSvg" | "closedSvg" | "DoneSvg" | "BanSvg";
 	hiddenIcon?: boolean;
 }
 
 function Status({ children, variant, icon = "openSvg", hiddenIcon = false }: StatusProps) {
 	return (
 		<div className={`${StatusVariants({ variant })}`}>
-			<img src={Icons[icon]} className="w-4" hidden={hiddenIcon} />
+			<img src={Icons[icon]} className="w-4 min-w-2" hidden={hiddenIcon} />
 			<p className="max-lg:hidden">{children}</p>
 		</div>
 	);
