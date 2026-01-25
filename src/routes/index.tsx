@@ -17,8 +17,9 @@ import { CalledDetails } from "../pages/adminPages/CalledDetails";
 import { NewTechnical } from "../pages/adminPages/tecnhicalSettings/NewTechnical";
 import { EditTechnical } from "../pages/adminPages/tecnhicalSettings/EditTechnical";
 import { AllCustomers } from "../pages/adminPages/AllCustomers";
+// TECHNICAL PAGES
 import { MyTechnicalCalled } from "../pages/technicalPages/MyCalled";
-
+import { EditCalled } from "../pages/technicalPages/EditCalled";
 
 export const user: { id: number; role: "admin" | "customer" | "technical" | "" } = {
 	id: 1,
@@ -47,8 +48,9 @@ function Router() {
 		case "technical":
 			return (
 				<Routes>
-					<Route path="/technical" element={<MainLayout type="technical" />}>
+					<Route path="technical" element={<MainLayout type="technical" />}>
 						<Route index element={<MyTechnicalCalled />} />
+						<Route path=":id/edit" element={<EditCalled />} />
 					</Route>
 				</Routes>
 			)
