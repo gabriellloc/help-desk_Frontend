@@ -19,7 +19,9 @@ export const textVariants = cva("leading-[140%]", {
 			"gray-200": "text-gray-200",
 			"gray-300": "text-gray-300",
 			"gray-400": "text-gray-400",
+			"gray-500": "text-gray-500",
 			"gray-600": "text-gray-600",
+			"feedBack-danger": "text-feedback-danger",
 			"blue-dark": "text-blue-dark",
 			"blue-light": "text-blue-light",
 		}

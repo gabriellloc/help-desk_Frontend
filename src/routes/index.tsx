@@ -23,7 +23,7 @@ import { EditCalled } from "../pages/technicalPages/EditCalled";
 
 export const user: { id: number; role: "admin" | "customer" | "technical" | "" } = {
 	id: 1,
-	role: "technical",
+	role: "",
 };
 
 function Router() {
