@@ -16,7 +16,7 @@ function AuthenticatedLayout() {
 			flex justify-end
 			`}
     >
-      <div className="bg-gray-600 w-screen min-h-full rounded-t-[20px] flex flex-col gap-8 items-center py-12 px-35 md:min-w-170 md:w-fit md:rounded-none md:rounded-tl-[20px]">
+      <div className="bg-gray-600 w-screen min-h-full rounded-t-[20px] flex flex-col gap-8 items-center py-12 px-12 md:px-35 md:min-w-170 md:w-fit md:rounded-none md:rounded-tl-[20px]">
         <div className="flex items-center gap-3">
           <img src={LogoLight} alt="Logo" className="w-10" />
           <Text variant={"text-xl"} color={"blue-dark"}>

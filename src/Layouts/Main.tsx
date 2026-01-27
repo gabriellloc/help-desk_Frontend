@@ -9,9 +9,9 @@ import ClipboardSvg from "../assets/icons/icon/clipboard-list.svg";
 import UsersSvg from "../assets/icons/icon/users.svg";
 import businessSvg from "../assets/icons/icon/briefcase-business.svg";
 import wrenchSvg from "../assets/icons/icon/wrench.svg";
+import PlusSvg from "../assets/icons/icon/plus.svg";
 import menuSvg from "../assets/icons/icon/menu.svg";
 import logOutSvg from "../assets/icons/icon/log-out.svg";
-import { user } from "../routes";
 
 interface MainLayoutProps {
   type: "admin" | "technical" | "customer";
@@ -96,7 +96,7 @@ function MainLayout({ type }: MainLayoutProps) {
             </NavLink>
 
             <NavLink
-              hidden={type == "technical"}
+              hidden={type !== "admin"}
               to={"/admin/tecnicos"}
               className={
                 url.pathname == "/admin/tecnicos"
@@ -112,7 +112,7 @@ function MainLayout({ type }: MainLayoutProps) {
             </NavLink>
 
             <NavLink
-              hidden={type == "technical"}
+              hidden={type !== "admin"}
               to={"/admin/clientes"}
               className={
                 url.pathname == "/admin/clientes"
@@ -125,7 +125,7 @@ function MainLayout({ type }: MainLayoutProps) {
             </NavLink>
 
             <NavLink
-              hidden={type == "technical"}
+              hidden={type !== "admin"}
               to={"/admin/servicos"}
               className={
                 url.pathname == "/admin/servicos"
@@ -135,6 +135,19 @@ function MainLayout({ type }: MainLayoutProps) {
             >
               <img src={wrenchSvg} className="w-5" />
               Serviços
+            </NavLink>
+
+            <NavLink
+              hidden={type !== "customer"}
+              to={"novo-chamado"}
+              className={
+                url.pathname == "/customer/novo-chamado"
+                  ? "flex gap-2 text-gray-500 p-3 bg-blue-dark rounded-[5px]"
+                  : "flex gap-2 text-gray-500 p-3 opacity-70 rounded-[5px] hover:bg-blue-dark"
+              }
+            >
+              <img src={PlusSvg} className="w-5" />
+              Novo chamado
             </NavLink>
           </div>
         </div>

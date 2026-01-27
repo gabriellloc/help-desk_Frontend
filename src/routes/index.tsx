@@ -21,51 +21,63 @@ import { AllCustomers } from "../pages/adminPages/AllCustomers";
 import { MyTechnicalCalled } from "../pages/technicalPages/MyCalled";
 import { EditCalled } from "../pages/technicalPages/EditCalled";
 
-export const user: { id: number; role: "admin" | "customer" | "technical" | "" } = {
-	id: 1,
-	role: "",
+export const user: {
+  id: number;
+  role: "admin" | "customer" | "technical" | "";
+} = {
+  id: 1,
+  role: "customer",
 };
 
 function Router() {
-	const context = useAuth();
-	console.log(context);
-	switch (user.role) {
-		case "admin":
-			return (
-				<Routes>
-					<Route path="admin" element={<MainLayout type="admin" />}>
-						<Route index element={<Called />} />
-						<Route path=":id/detalhes" element={<CalledDetails />} />
-						<Route path="tecnicos" element={<Technical />} />
-						<Route path="tecnicos/novo" element={<NewTechnical />} />
-						<Route path="tecnicos/:id/edit" element={<EditTechnical />} />
-						<Route path="clientes" element={<AllCustomers />} />
-						<Route path="servicos" element={<AllServices />} />
-					</Route>
-				</Routes>
-			);
+  const context = useAuth();
 
-		case "technical":
-			return (
-				<Routes>
-					<Route path="technical" element={<MainLayout type="technical" />}>
-						<Route index element={<MyTechnicalCalled />} />
-						<Route path=":id/edit" element={<EditCalled />} />
-					</Route>
-				</Routes>
-			)
-		case "customer":
-			return;
-		default:
-			return (
-				<Routes>
-					<Route path="/" element={<AuthenticatedLayout />}>
-						<Route index element={<Login />} />
-						<Route path="signUp" element={<SignUp />} />
-					</Route>
-				</Routes>
-			)
-	}
+  console.log(context);
+
+  switch (user.role) {
+    case "admin":
+      return (
+        <Routes>
+          <Route path="admin" element={<MainLayout type="admin" />}>
+            <Route index element={<Called />} />
+            <Route path=":id/detalhes" element={<CalledDetails />} />
+            <Route path="tecnicos" element={<Technical />} />
+            <Route path="tecnicos/novo" element={<NewTechnical />} />
+            <Route path="tecnicos/:id/edit" element={<EditTechnical />} />
+            <Route path="clientes" element={<AllCustomers />} />
+            <Route path="servicos" element={<AllServices />} />
+          </Route>
+        </Routes>
+      );
+
+    case "technical":
+      return (
+        <Routes>
+          <Route path="technical" element={<MainLayout type="technical" />}>
+            <Route index element={<MyTechnicalCalled />} />
+            <Route path=":id/edit" element={<EditCalled />} />
+          </Route>
+        </Routes>
+      );
+    case "customer":
+      return (
+        <Routes>
+          <Route path="customer" element={<MainLayout type="customer" />}>
+            <Route index element />
+            <Route path="novo-chamado" element />
+          </Route>
+        </Routes>
+      );
+    default:
+      return (
+        <Routes>
+          <Route path="/" element={<AuthenticatedLayout />}>
+            <Route index element={<Login />} />
+            <Route path="signUp" element={<SignUp />} />
+          </Route>
+        </Routes>
+      );
+  }
 }
 
 export { Router };
