@@ -26,7 +26,7 @@ export const user: {
   role: "admin" | "customer" | "technical" | "";
 } = {
   id: 1,
-  role: "customer",
+  role: "",
 };
 
 function Router() {

@@ -5,7 +5,7 @@ import { Text } from "../../../components/Text";
 import { Button } from "../../../components/Button";
 
 import BackSvg from "../../../assets/icons/icon/arrow-left.svg";
-import { Input } from "../../../components/Input";
+import Input from "../../../components/formsInput";
 import { AvailabilityButton } from "../../../components/AvailabilityButton";
 
 function NewTechnical() {
@@ -56,39 +56,34 @@ function NewTechnical() {
 
           <div className="flex flex-col gap-0.5">
             <form className="flex flex-col gap-4">
-              <Input
-                name="nome"
-                children={"Nome"}
-                type="text"
-                label={"labelDefault"}
-                input={"inputDefault"}
-                SError={"errorDefault"}
-                placeholder={"Nome completo"}
-                error={""} // Nunca definir error aqui
-                htmlFor="nome"
-              />
-              <Input
-                name="email"
-                children={"E-mail"}
-                type="email"
-                label={"labelDefault"}
-                input={"inputDefault"}
-                SError={"errorDefault"}
-                placeholder={"exemplo@mail.com"}
-                error={""} // Nunca definir error aqui
-                htmlFor="email"
-              />
-              <Input
-                name="password"
-                children={"Senha"}
-                type="password"
-                label={"labelDefault"}
-                input={"inputDefault"}
-                SError={"errorDefault"}
-                placeholder={"Defina a senha de acesso"}
-                error={""} // Nunca definir error aqui
-                htmlFor="password"
-              />
+              <Input.InputRoot>
+                <Input.InputLabel children="Nome" htmlFor="IdTechnicalName" />
+                <Input.InputControl
+                  id="IdTechnicalName"
+                  placeholder="Nome completo"
+                />
+              </Input.InputRoot>
+              <Input.InputRoot>
+                <Input.InputLabel
+                  children="E-mail"
+                  htmlFor="IdTechnicalEmail"
+                />
+                <Input.InputControl
+                  id="IdTechnicalEmail"
+                  placeholder="exemplo@mail.com"
+                />
+              </Input.InputRoot>
+              <Input.InputRoot>
+                <Input.InputLabel
+                  children="Senha"
+                  htmlFor="IdTechnicalPassword"
+                />
+                <Input.InputControl
+                  id="IdTechnicalPassword"
+                  placeholder="Defina a senha de acesso"
+                  name="password"
+                />
+              </Input.InputRoot>
             </form>
           </div>
         </div>

@@ -1,9 +1,10 @@
 import { useState } from "react";
+
 import { Text } from "./Text";
+import { Button } from "./Button";
+import Input from "../components/formsInput";
 
 import XSvg from "../assets/icons/icon/x.svg";
-import { Input } from "./Input";
-import { Button } from "./Button";
 
 type User = {
   id: number;
@@ -79,52 +80,51 @@ function ModalRegister({ user, type, services, onClose }: ModalRegister) {
         </div>
         <hr className="text-gray-500" />
         <form action="" className="py-5 px-7 flex flex-col gap-4">
-          <Input
-            htmlFor="name"
-            name="name"
-            children={type == "Cliente" ? "Nome" : "Titulo"}
-            type="text"
-            label={"labelDefault"}
-            input={"inputDefault"}
-            SError={"errorDefault"}
-            placeholder={
-              type == "Cliente" ? "Nome completo" : "Nome do serviço"
-            }
-            value={
-              type == "Cliente" ? name : services != undefined ? title : title
-            }
-            onChange={(e) => {
-              if (type === "Cliente") {
-                setName(e.target.value);
-              } else {
-                setTitle(e.target.value);
+          <Input.InputRoot>
+            <Input.InputLabel
+              children={type == "Cliente" ? "Nome" : "Titulo"}
+              htmlFor="IdName"
+            />
+            <Input.InputControl
+              id="IdName"
+              placeholder={
+                type == "Cliente" ? "Nome completo" : "Nome do serviço"
               }
-            }}
-            error={``}
-          />
-          <Input
-            htmlFor="email"
-            name="email"
-            children={type == "Cliente" ? "email" : "Valor"}
-            type={type == "Cliente" ? "email" : "number"}
-            min={0}
-            label={"labelDefault"}
-            input={"inputDefault"}
-            SError={"errorDefault"}
-            placeholder={type == "Cliente" ? "Email" : "R$ 0,00"}
-            value={
-              type == "Cliente"
-                ? email
-                : services != undefined
-                  ? amount
-                  : amount
-            }
-            onChange={(e) => {
-              setEmail(e.target.value);
-              setAmount(Number(e.target.value));
-            }}
-            error={``}
-          />
+              value={
+                type == "Cliente" ? name : services != undefined ? title : title
+              }
+              onChange={(e) => {
+                if (type === "Cliente") {
+                  setName(e.target.value);
+                } else {
+                  setTitle(e.target.value);
+                }
+              }}
+            />
+          </Input.InputRoot>
+          <Input.InputRoot>
+            <Input.InputLabel
+              children={type == "Cliente" ? "email" : "Valor"}
+              htmlFor="IdEmail"
+            />
+            <Input.InputControl
+              id="IdEmail"
+              placeholder={type == "Cliente" ? "Email" : "R$ 0,00"}
+              type={type == "Cliente" ? "email" : "number"}
+              min={0}
+              value={
+                type == "Cliente"
+                  ? email
+                  : services != undefined
+                    ? amount
+                    : amount
+              }
+              onChange={(e) => {
+                setEmail(e.target.value);
+                setAmount(Number(e.target.value));
+              }}
+            />
+          </Input.InputRoot>
         </form>
         <hr className="text-gray-500" />
         <Button classname="flex-1 mx-6 my-6">Salvar</Button>

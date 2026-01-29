@@ -3,7 +3,7 @@ import { useActionState } from "react";
 
 // Components
 import { Button } from "../components/Button";
-import { Input } from "../components/Input";
+import Input from "../components/formsInput";
 import { Text } from "../components/Text";
 
 function SignUp() {
@@ -30,43 +30,42 @@ function SignUp() {
         </Text>
       </div>
 
-      <form action={formAction} id="formRegister">
-        <Input
-          htmlFor="name"
-          name="name"
-          children={"Nome"}
-          type="text"
-          label={"labelDefault"}
-          input={"inputDefault"}
-          SError={"errorDefault"}
-          placeholder={"Digite seu nome completo"}
-          error={``}
-          required
-        />
-        <Input
-          name="email"
-          htmlFor="email"
-          children={"e-mail"}
-          type="email"
-          label={"labelDefault"}
-          input={"inputDefault"}
-          SError={"errorDefault"}
-          placeholder={"exemplo@mail.com"}
-          error={``}
-          required
-        />
-        <Input
-          name="password"
-          htmlFor="senha"
-          children={"senha"}
-          type="password"
-          label={"labelDefault"}
-          input={"inputDefault"}
-          SError={"errorDefault"}
-          placeholder={"Digite seu senha"}
-          error={``}
-          required
-        />
+      <form
+        action={formAction}
+        className="flex flex-col gap-4"
+        id="formRegister"
+      >
+        <Input.InputRoot>
+          <Input.InputLabel children="Nome" htmlFor="IdName" />
+          <Input.InputControl
+            name="name"
+            id="IdName"
+            placeholder="Digite seu nome completo"
+            required
+          />
+        </Input.InputRoot>
+
+        <Input.InputRoot>
+          <Input.InputLabel children="E-mail" htmlFor="IdEmail" />
+          <Input.InputControl
+            name="email"
+            id="IdEmail"
+            type="email"
+            placeholder="exemplo@mail.com"
+            required
+          />
+        </Input.InputRoot>
+
+        <Input.InputRoot>
+          <Input.InputLabel children="Senha" htmlFor="IdPassword" />
+          <Input.InputControl
+            name="password"
+            id="IdPassword"
+            type="password"
+            placeholder="Digite sua senha"
+            required
+          />
+        </Input.InputRoot>
       </form>
       <Button type="submit" form="formRegister" disabled={isPending}>
         Criar conta
