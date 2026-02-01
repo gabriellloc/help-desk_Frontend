@@ -9,7 +9,7 @@ import BackSvg from "../../assets/icons/icon/arrow-left.svg";
 import doneSvg from "../../assets/icons/icon/circle-check-big-gray.svg";
 import clockSvg from "../../assets/icons/icon/clock-2-gray.svg";
 
-function CalledDetails() {
+export function CalledDetails() {
   const navigate = useNavigate();
 
   return (
@@ -29,11 +29,11 @@ function CalledDetails() {
         </div>
 
         <div className="min-w-2xs flex flex-1 gap-2 items-end">
-          <Button variant={"secondary"} classname="flex-1">
+          <Button variant={"secondary"} className="flex-1">
             <img src={clockSvg} className="w-4" />
             Em atendimento
           </Button>
-          <Button variant={"secondary"} classname="flex-1">
+          <Button variant={"secondary"} className="flex-1">
             <img src={doneSvg} className="w-4" />
             Encerrado
           </Button>
@@ -176,5 +176,3 @@ function CalledDetails() {
     </div>
   );
 }
-
-export { CalledDetails };

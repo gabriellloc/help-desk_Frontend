@@ -1,16 +1,16 @@
-import { useState } from "react";
 import { useNavigate } from "react-router";
 
 import { Text } from "../../components/Text";
 import { Button } from "../../components/Button";
+import { Dialog } from "../../components/Dialog";
+
+import * as Modal from "@radix-ui/react-dialog";
 
 import BackSvg from "../../assets/icons/icon/arrow-left.svg";
 import PlusSvg from "../../assets/icons/icon/plus.svg";
 import TrashSvg from "../../assets/icons/icon/trash.svg";
-import { ModalRegister } from "../../components/ModalRegister";
 
 function EditCalled() {
-  const [OpenModal, setOpenModal] = useState(false);
   const navigate = useNavigate();
   return (
     <div className="bg-gray-600 w-full overflow-auto h-full mt-3 rounded-tl-[20px] py-13 px-12 flex flex-col gap-6">
@@ -31,12 +31,12 @@ function EditCalled() {
         <div className="min-w-2xs flex gap-2 items-end max-md:flex-1">
           <Button
             variant={"secondary"}
-            classname="flex-1"
+            className="flex-1"
             onClick={() => navigate(-1)}
           >
             Encerrar
           </Button>
-          <Button variant={"primary"} classname="min-w-fit flex-1">
+          <Button variant={"primary"} className="min-w-fit flex-1">
             Iniciar atendimento
           </Button>
         </div>
@@ -177,9 +177,25 @@ function EditCalled() {
             <Text variant={"text-xs-bold"} color={"gray-400"}>
               Serviços adicionais
             </Text>
-            <Button classname="scale-75" onClick={() => setOpenModal(true)}>
-              <img src={PlusSvg} alt="Adicionar Serviço" className="w-4 h-4" />
-            </Button>
+            {/* Trigger */}
+            <Modal.Root>
+              <Modal.DialogTrigger asChild>
+                <Button className="scale-75">
+                  <img
+                    src={PlusSvg}
+                    alt="Adicionar Serviço"
+                    className="w-4 h-4"
+                  />
+                </Button>
+              </Modal.DialogTrigger>
+              <Dialog
+                title="Serviço adicional"
+                firstLabel="Descrição"
+                firstPlaceholder="Assinatura de backup"
+                secondLabel="Valor"
+                secondPlaceholder="R$ 0,00"
+              />
+            </Modal.Root>
           </div>
 
           <div className="flex flex-col gap-3">
@@ -219,13 +235,6 @@ function EditCalled() {
           </div>
         </div>
       </div>
-
-      {OpenModal && (
-        <ModalRegister
-          type="Cadastro de serviço"
-          onClose={() => setOpenModal(false)}
-        />
-      )}
     </div>
   );
 }

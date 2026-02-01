@@ -57,10 +57,10 @@ function ModalRegister({ user, type, services, onClose }: ModalRegister) {
           </div>
 
           <div className="flex gap-2 py-5 px-7">
-            <Button variant={"secondary"} classname="flex-1" onClick={onClose}>
+            <Button variant={"secondary"} className="flex-1" onClick={onClose}>
               Cancelar
             </Button>
-            <Button classname="flex-1">Sim, excluir</Button>
+            <Button className="flex-1">Sim, excluir</Button>
           </div>
         </div>
       </div>
@@ -127,7 +127,7 @@ function ModalRegister({ user, type, services, onClose }: ModalRegister) {
           </Input.InputRoot>
         </form>
         <hr className="text-gray-500" />
-        <Button classname="flex-1 mx-6 my-6">Salvar</Button>
+        <Button className="flex-1 mx-6 my-6">Salvar</Button>
       </div>
     </div>
   );

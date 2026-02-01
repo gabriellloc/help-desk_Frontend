@@ -1,4 +1,4 @@
-import React from "react";
+import React, { type ComponentProps } from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 
 export const textVariants = cva("leading-[140%]", {
@@ -35,7 +35,7 @@ export const textVariants = cva("leading-[140%]", {
 interface TextProps extends VariantProps<typeof textVariants> {
   as?: keyof React.JSX.IntrinsicElements;
   children: React.ReactNode;
-  classname?: string;
+  className?: string;
 }
 
 function Text({
@@ -43,10 +43,10 @@ function Text({
   variant,
   color,
   children,
-  classname,
+  className,
 }: TextProps) {
   return (
-    <Component className={`${textVariants({ variant, color })} ${classname}`}>
+    <Component className={`${textVariants({ variant, color })} ${className}`}>
       {children}
     </Component>
   );

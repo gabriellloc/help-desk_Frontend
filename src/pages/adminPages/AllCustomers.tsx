@@ -5,6 +5,8 @@ import { Text } from "../../components/Text";
 import penSvg from "../../assets/icons/icon/pen-line.svg";
 import trashSvg from "../../assets/icons/icon/trash.svg";
 import { ModalRegister } from "../../components/ModalRegister";
+import * as Modal from "@radix-ui/react-dialog";
+import { Dialog } from "../../components/Dialog";
 
 type User = {
   id: number;
@@ -31,7 +33,6 @@ const customers: User[] = [
 ];
 
 function AllCustomers() {
-  const [selectedUser, setSelectedUser] = useState<User | null>();
   const [deleteUser, setDeleteUser] = useState<User | null>();
 
   return (
@@ -67,38 +68,52 @@ function AllCustomers() {
                 </td>
 
                 <td className="flex py-3 gap-2">
-                  <button
-                    className="w-7 h-7 bg-gray-500 flex justify-center items-center rounded-[5px] cursor-pointer transition hover:opacity-60"
-                    onClick={() => {
-                      setDeleteUser(customer);
-                    }}
-                  >
-                    <img
-                      src={trashSvg}
-                      alt="Remover cliente"
-                      className="w-3.5"
+                  {/* Botão / Modal de deletar usuário */}
+                  <Modal.Root>
+                    <Modal.Trigger>
+                      <button className="w-7 h-7 bg-gray-500 flex justify-center items-center rounded-[5px] cursor-pointer transition hover:opacity-60">
+                        <img
+                          src={trashSvg}
+                          alt="Remover cliente"
+                          className="w-3.5"
+                        />
+                      </button>
+                    </Modal.Trigger>
+                    <Dialog
+                      title="Excluir Cliente"
+                      description={`Deseja realmente excluir ${customer.name}?`}
+                      type="deleteUser"
                     />
-                  </button>
-                  <button
-                    className="w-7 h-7 bg-gray-500 flex justify-center items-center rounded-[5px] cursor-pointer transition hover:opacity-60"
-                    onClick={() => setSelectedUser(customer)}
-                  >
-                    <img src={penSvg} alt="Editar cliente" className="w-3.5" />
-                  </button>
+                  </Modal.Root>
+                  {/* Botão / Modal de editar usuário */}
+                  <Modal.Root>
+                    <Modal.Trigger asChild>
+                      <button
+                        className="w-7 h-7 bg-gray-500 flex justify-center items-center rounded-[5px] cursor-pointer transition hover:opacity-60"
+                        // onClick={() => setSelectedUser(customer)}
+                      >
+                        <img
+                          src={penSvg}
+                          alt="Editar cliente"
+                          className="w-3.5"
+                        />
+                      </button>
+                    </Modal.Trigger>
+
+                    <Dialog
+                      title="Cliente"
+                      firstLabel="Nome"
+                      firstValue={customer.name}
+                      secondLabel="E-mail"
+                      secondValue={customer.email}
+                    />
+                  </Modal.Root>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-
-      {selectedUser && (
-        <ModalRegister
-          type="Cliente"
-          user={selectedUser}
-          onClose={() => setSelectedUser(null)}
-        />
-      )}
 
       {deleteUser && (
         <ModalRegister

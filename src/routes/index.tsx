@@ -26,7 +26,7 @@ export const user: {
   role: "admin" | "customer" | "technical" | "";
 } = {
   id: 1,
-  role: "",
+  role: "admin",
 };
 
 function Router() {
@@ -47,6 +47,11 @@ function Router() {
             <Route path="clientes" element={<AllCustomers />} />
             <Route path="servicos" element={<AllServices />} />
           </Route>
+
+          <Route path="/" element={<AuthenticatedLayout />}>
+            <Route index element={<Login />} />
+            <Route path="signUp" element={<SignUp />} />
+          </Route>
         </Routes>
       );
 
@@ -57,6 +62,11 @@ function Router() {
             <Route index element={<MyTechnicalCalled />} />
             <Route path=":id/edit" element={<EditCalled />} />
           </Route>
+
+          <Route path="/" element={<AuthenticatedLayout />}>
+            <Route index element={<Login />} />
+            <Route path="signUp" element={<SignUp />} />
+          </Route>
         </Routes>
       );
     case "customer":
@@ -65,6 +75,11 @@ function Router() {
           <Route path="customer" element={<MainLayout type="customer" />}>
             <Route index element />
             <Route path="novo-chamado" element />
+          </Route>
+
+          <Route path="/" element={<AuthenticatedLayout />}>
+            <Route index element={<Login />} />
+            <Route path="signUp" element={<SignUp />} />
           </Route>
         </Routes>
       );
